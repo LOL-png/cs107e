@@ -1,0 +1,77 @@
+// Style reflection submitted with assign3
+1. 
+struct device{ 
+    unsigned int* config[3]; //3x32 bit config register
+};
+
+//gpio_get_function takes in a pin and returns the function a pin has been set to
+unsigned int gpio_get_function(gpio_id_t pin) {
+
+    //check if pin is valid; if not, return GPIO_INVALID_REQUEST
+    if(!gpio_id_is_valid(pin)){
+        return GPIO_INVALID_REQUEST;
+    }
+    
+    //assign index and memory address
+    gpio_pin_t outputReg = get_group_and_index(pin);
+
+    //uses a struct for specified pin and group
+    struct device *dev =  (struct device *) 0x2000030; 
+    dev += (outputReg.group); 
+
+    unsigned int index = 0;
+
+    //converts the pin to correct memory address; 
+    // also converts pin number to a bit index
+    if(outputReg.pin_index >=  16){
+        index = outputReg.pin_index - 16;
+    }
+    
+    else if(outputReg.pin_index >= 8 ){
+        index = outputReg.pin_index - 8;
+    }
+
+    else{
+        index = outputReg.pin_index;
+    }
+
+    unsigned int constantOne = 0b1111;
+
+    //returns the four bits starting from the specific index
+    return  ((dev->config[index/8]) >> index*4) & constantOne;
+}
+
+2. Time was converted into minutes and seconds on first call. My loop would then decrement seconds. If seconds reached 0, it would set seconds to 59, decrement minutes, and continue decrementing seconds.
+Time was up when both seconds and minutes were 0. 
+
+I notice an inefficiency in my code came from seconds and digits being two-digit numbers. To be displayed, I would need to get each indiviudal digit, requiring an intermdiary calculation every time.
+In the future, I could store time in terms of each digit - the tens digit for minutes, the single digit for minutes, the tens digit for seconds, and the singles digit for seconds.
+I do note that this adds extra complexity in terms of decrementing, so I may just be shifting work from one area to another.
+
+I do like my approach over a purely seconds calculation as it simplified my math and didn't require me to use long numbers in the thousands (versus just up to 100).
+
+3. 
+
+b. We would like to verify memset only writes where it is told, because we do not want a future where we end up overwriting previous data.
+
+static void test_memsetMore(void){
+    char buf[24];
+    char *first = buf[0];
+    size_t bufsize = sizeof(buf);
+
+    memset((first+8), 0x7e, 8); // write 0x7e (char '~') for 8 char
+
+    for (int i = 0; i < 8; i++){
+        assert(buf[i] != 0x7e); // confirm it did not write from 0 to 7
+    }
+
+    for (int i = 16; i < bufize; i++){
+        assert(buf[i] != 0x7e); // confirm it did not write from 16 to end of buf (23)
+    }
+    
+}
+
+ 
+
+
+

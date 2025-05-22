@@ -1,0 +1,23 @@
+// Style reflection submitted with assign4
+1. 
+At Line 157: 
+if(*(tracker) == '%'){ //percent
+    char arr[] = { 0x25,'\0'};
+    temp = arr;
+}
+
+Replace
+if(*(tracker) == '%'){ //percent
+   memcpy(temp,"%",2);
+}
+
+2. All padding is currently unified into one function. This was made possible by creating "condition" variables that were passed to the padding function.
+These condition variables let the padding function know which type of padding to implement (such as a zero or space).
+
+3. Dissecting parts allows the code to better optimize against edge cases. For example, the four step method introdcued leads to directly four sections in my code, writing, reversing, padding, and truncating. For all test cases,
+code can be executed through each section in that order. If I wanted to handle everything in a single pass, I would need to worry about edge cases where some functions occur in a different order. 
+If padding was needed, that would need to be added, before I processed any of the numbers to the right. And if truncation was needed, it would now be after padding. This order is nonintuitive to right, and leads to many edge cases as we now have to specify order.
+The benefit of timing complexity is minimized by the structural complexity of the code.
+
+4. If a string is invalid, or does not point to well-formed string, the function strlen will never return. This is because strlen usees a while loop to go character by character starting from the address of the pointer.
+The condition for the loop to stop is when the current character is the null character. This can never be reached if the string is malformed, so the loop will continue on forever.

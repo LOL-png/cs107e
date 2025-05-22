@@ -1,0 +1,20 @@
+// Style reflection submitted with assign1
+1. In developing program style, one of the greater a-ha moments was learning I could comment on the right side of code I wrote. I did not need to add as many lines in my code (taking away the ugly spaces),and having it one the side made it easier for me to identify what piece of code the comment was describing.
+
+2. 
+I liked Prof. Eno Thereska's point of adding comments at the end of a bracket in C. When I create nested structures in C, it was often hard to determine what the purpose of a bracket was for. Having this would help me track my brackets, and know why I put a bracket to end and begin another piece of code.
+
+I liked the Google guide to function overloading. It said that you should be able to "document all entries in the overload set with a single comment in the header." I have overloaded functions before where each function had a completely different purpose than the other function, and it took  me a couple lines for a comment. Google points out that I should have considered making them different functions. I was attached to overloading because the set of functions relied on each other, but their difference in purpose (and therefore long code comments) is what should have told me to separate them.
+
+I liked the CS 107 guide to booleans. I have a habit of doing bool==false instead of just !bool, mostly because I treat booleans as any other variable. The guide pointed out a redundant habit of mine.
+
+3. I should always add brackets for if statements (even one-liners) as this helps protect my code from malfunctioning if individuals in the future add further lines of code, which would not be included in the if statement (courtesy of Prof. Eno Thereska's guide).
+
+4. URL: https://github.com/TiinaManninen/synapsemodel/blob/master/astrocyte.py
+I like this piece of code as functions with longer inputs had each input on the next line (with code comments to describe each input), making the code much easier to read and track what the code was doing.
+
+5. I am looking to improve my coding quality for nested functions. I often lose track of my functions when they are nested, and so any tips on labeling brackets, adding comments for inputs, and other ways of improving the quality of my nested functions would help.
+
+
+
+  

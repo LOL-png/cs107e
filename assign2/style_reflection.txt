@@ -1,0 +1,15 @@
+// Style reflection submitted with assign2
+1. In gpio_set_function, a detected error leads to the function not executing (ie. immediately returning).
+gpio_set_function is intended to set a pin to a specific function. An error occurs when a command is given that cannot be physically executed (such as a pin that does not exist, or a function that exceeds 15). 
+We immeidately stop the function as would like to not risk changing other pins, and instead await for another command.
+
+2. The program is given with one global variable, DURATION. This should not be changed as it is used across multiple files and modules (ie. it is used in clock.c, but also in another place for the command, make run DURATION).
+The rest of the variables at the top of my file are file-evel static variables, and are not global variables.
+
+3. I felt good about the modular design of countdownClock, defined on line 129. This is the function that handles decrementing seconds, and refers the display of digits to countdownClockHelper in line 43. 
+For the ending message, countdownClock calls upon blinkMessage, defined at line 82.
+
+There is a repetitive for loop I used in blinkMessage and countdownClockHelper, at line 54 and 96 respectively. This loop handles turning on segment LEDs and then turning them off. 
+I think I could have made a helper function that just changed segment LEDs to be on for a given digit and number.
+
+I do wish I knew how to do my delay better at line 84 and 121. I had to account for a delay off after 0000 had been displayed, so line 84 was needed. But this led to having an additional call that made tracking timings confusing.

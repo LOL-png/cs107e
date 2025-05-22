@@ -1,0 +1,30 @@
+// Style reflection submitted with assign5
+1. Categorical reflections:
+Character handling: Okay. I have an incosistent use of characters as numbers or as symbols. I use some helper functions, but I lack the finer details like "tolower."
+Number processing: Great. I used modular arithmetic and then reversed the numbers. This was basically O(N).
+Code unification: Great. I set the base to be a variable, which would change depending on what if it was a decimal or hexidecimal. The math would then be computed using this variable, irrelative of what was stored in the variable.
+Code reuse strlcat: Great/Okay. For longer pieces of code, I used strcat, strlen, and memcpy heavily. If something just asked for a null char at the end, I would usually assign a variable to be null char, then concat as necessary.
+Code snprintf: Great. Padding was a helper function that used memset to create padding bytes, as well as call strlcat to append to the string.
+
+2. My test cases for padding used several cases. It first gave a case where no padding was necessary, expecting it to output the original. 
+If padding was needed, I tested padding on both a hexidecimal and regular string to see if it padded a 0 or space.
+The last case for padding testing multiple padding functions in one printf function.
+
+This testing procedure relied on understanding that the padding function was test case dependent - as in there were if-statements underneath and I wanted to test all the branches.
+I could certaintly try testing all the branches in malloc, but success through an individual branch is not enough to prove malloc works. In malloc's case, error can build up on iteration against iteration, which is why I needed to test writing and freeing many times.
+
+3. A clear box testing is allocating 24 bytes in malloc, freeing 24 bytes, and allocating 8 bytes again. We test that 8 bytes are allocated to a used block, and 16 bytes are allocated to an unused block in heap dump.
+This test misses what is stored in the elements, and if all values have not only been allocated, but placed in the correction location.
+Additional tests would loop from the malloc allocated pointer and iterate through values, verifying we obtain what we expect.
+
+4. The first report throws an error if a NULL pointer is used for a block and stores a 0 size. This is by obtaining the address of the block and the size stores in the header.
+The second report throws an error if the allocated pointer of the block is not 8-byte oriented. This is done by obtaining the address of the block and reporting if %8 == 0.
+The third report verifies that a block is between the start and end of the heap. It compares if the memory address of block falls below the start of the heap, or if the memeory address + block size is greater than the heap size. 
+The fourth report verifies every block is in the location they are set as. This is done by comparing each block to its left and right neighbor and seeing if its start address falls into its left neighbor, or if its ending address extends to its right neighbor.
+
+5. The heap workflow determined a bug where my total_bytes_requested was not calculated correctly. 
+This was a special case where there was free space in the heap, but filling in this free space would make the block extend beyond the curent total_bytes_requested count. 
+I thought that we would only increase total_bytes_requested when a block was added at the end of the heap, so I ignored testing this test case.
+
+
+

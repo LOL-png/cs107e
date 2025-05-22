@@ -1,0 +1,52 @@
+// File: background.txt
+1. By first peforming 0x0F OR 0xFF, the result is 255.
+A shift by 24 of the result, 255 or 0xFF, produces 0xFF000000.
+
+2. I = V/R = 3/1.5 = 2 mA
+
+3. There is a file named "aliases.db" with 16,384 bytes. There are 840 files and directories. 
+Commands:
+cd \etc
+man ls
+ls -l
+
+4. An absolute path is a path through all directory levels. A relative directory is a path from the current directory.
+
+5. Using cd with the below symbols results in going to the directories represented by the symbols. 
+~: Home directory
+.: Current directory
+..: Directory one level above
+
+6. The absolute path of $CS107E is: /Users/24jih/cs107e_home/mycode/cs107e
+You can change to this directory using cd $CS107E
+
+7. I am using vim, and I plan to learn using vim by watching tutorials and also continually practicing with it in the coming weeks. 
+
+8. $PATH is an environment variable set as a default on our computers. It is where the terminal stores executible files or commands.
+
+9.I keep all my windows open on the home screen of my laptop (because macs have limited split screen capabilities). This usually means I have the directions on the top of the screen, with two terminals on the bottom. One of them is writing right now in vim, the other one is where I am testing commands from assignment questions. If space runs out, I will use a second monitor (iPad) to keep my instructions, and have all the code on my laptop screen.
+
+10. 
+cd: Moves to specified directory
+pwd: Returns absolute path of a directory
+ls: Prints out all file names (and properties) in a directory
+cat: Prints the content of a file
+mkdir: Creates a directory
+rmdir: Deletes a directory
+touch: Pretends you opened the file, modifying access time
+rm: Removes a file
+echo: Prints into the terminal what you give it
+
+11.Pressing tab completes the function, and pressing it again and again will loop through other possibilites of how to complete the function.
+
+12. Pressing ctrl + c opens a new line immediately.
+
+13. Pressing ctrl + c opens a new line and also cancels the current task.
+
+14. Ctrl-r allows you to search a previous command you used, and the up arrow ccycles through recent commands, starting with the most recent. 
+
+15. Commits are snapshots of your code you can go back on. A branch is a copy of a code you can edit and commit independently of another branch.
+
+16. I used this video: https://www.youtube.com/watch?v=ogWoUU2DXBU&ab_channel=Academind
+
+ 

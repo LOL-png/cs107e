@@ -1,0 +1,62 @@
+// Style reflection submitted with assign6
+1. If we were to support a different keymap, we would need to change how our scancode maps onto a key value.
+This would come in redefining the array ps2_keys[] as it maps each scancode to an ASCII value based on its modifier.
+The rest of the code would stay about the same, calling to the array to retrieve a key value.
+
+If we added other modifiers, the code would need to change siginficantly. 
+
+We first define new values to represent the commands of additional modifiers like ctrl+letter or alt+letter. These values would need to be translated later.
+
+To help store the values associated with a ctrl+letter or alt+letter command, we can extend the ps2_key_t structure to include ctrl_command and alt_command. So when we define an 
+array of scancodes in ps2_keys[], we know each scancode requires 4 four values, ch, other_ch, ctrl_command, alt_command.
+
+We have already built in functionality to track these additional modifiers and associate them with a keypress. This enables retrieval of values using the new storage method described above. 
+We now to need add a major part: translating the values into commands.
+
+For commands like ctrl-z, we would need to have a mid-level interpetation that says "undo." This would be an additional function, which
+translates values into a function call, calling "undo" or some other function.
+
+2. Flyweight programming: if we are generating multiple things, we can use one structure to store shared information, and separate individual cells for local information.
+
+If we have many swimmers and want to simulate a race, how do we go about it?
+
+We first create a common structure to detail swimming conditions like distance and platform height.
+
+swim_condition struct{
+    outfit_drag_coefficient = 0.5; //meter per second
+    platform_height = 1; //meters
+    distance_to_achieve = 100 m; //meters
+};
+
+We utilize the above data structure in defining a single swimmer as all swimmers will have the same conditions. 
+This structure will include information particular to a swimmer.
+
+person1 struct{
+    swim_condition * conditions;
+
+    speed = 3; //meter per second
+    weight = 140; //pounds
+    height = 180; //centimeter
+};
+
+3. Under the hood, the code will store a array of a structure called bind. 
+
+bind struct{
+    char * identifier;
+    void * pointer;
+}
+
+Bind stores a string called identifier, which represents the shortcut. In the example, this would be 'h'.
+Bind also stores the pointer to a function. 
+
+Each call of bind in the terminal will add an element of bind to the array with the corresponding identifier and function call. 
+We can retrieve functions by looking for the identifier and executing the function pointer.
+
+4. The finite state machine is drawn and attached as ps2_FSM.jpeg.
+
+If I was told to draw from the diagram, I would create a series of functions. These functions would be labeled accordingly as
+start, timing, parity, stop, and return. Each function would compute a task, and if it succeeded, it would call on the successive function. If it failed, it would default return to start.
+The loop beings when the user calls upon start from some main function. This is very different from my current implementation, as most of my functions are called out of order, and not succesively like the diagram.
+
+
+
